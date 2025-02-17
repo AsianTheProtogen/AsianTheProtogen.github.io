@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fading Text</title>
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000;
+            color: white;
+            font-size: 3em;
+        }
+
+        .fade-text {
+            opacity: 0;
+            transition: opacity 5s;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="text" class="fade-text">Hey</div>
+
+    <script>
+        const textElement = document.getElementById('text');
+        let messages = [
+            "Hey",
+            "If you're here you care about me.",
+            "Thank you."
+        ];
+        let messageIndex = 0;
+
+        function changeText() {
+            textElement.style.opacity = 1;
+            textElement.innerHTML = messages[messageIndex];
+            messageIndex++;
+
+            setTimeout(() => {
+                textElement.style.opacity = 0;
+            }, 3000);  // 3 seconds of fade in
+
+            setTimeout(() => {
+                if (messageIndex < messages.length) {
+                    changeText();  // Continue showing next message
+                } else {
+                    setTimeout(() => {
+                        window.location.href = "https://www.google.com";  // Redirect after last message
+                    }, 3000); // Wait 3 seconds before redirect
+                }
+            }, 6000);  // Wait for 6 seconds (3 sec fade in + 3 sec fade out)
+        }
+
+        window.onload = changeText;
+    </script>
+
+</body>
+</html>
